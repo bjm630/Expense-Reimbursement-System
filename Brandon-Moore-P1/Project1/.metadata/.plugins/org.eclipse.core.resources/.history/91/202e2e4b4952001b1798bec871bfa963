@@ -1,0 +1,72 @@
+package com.revature.junitTests;
+import java.sql.Timestamp;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.revature.DAO.TicketDao;
+import com.revature.DAO.TicketDaoImp;
+import com.revature.DAO.UserDao;
+import com.revature.DAO.UserDaoImp;
+import com.revature.models.Ticket;
+import com.revature.service.TicketService;
+import com.revature.service.TicketServiceImp;
+import com.revature.service.UserService;
+import com.revature.service.UserServiceImp;
+import junit.framework.Assert;
+
+@RunWith(MockitoJUnitRunner.class)
+public class TestViewAllTickets {
+	
+	@Mock
+	TicketService uServ;
+	
+	@Mock
+	TicketDao uDao;
+	
+	@InjectMocks
+	TicketServiceImp tServImp = new TicketServiceImp();
+	TicketDaoImp tDaoImp = new TicketDaoImp();
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
+	
+	Integer ticketID = 1;
+	@SuppressWarnings("deprecation")
+	Timestamp date = new Timestamp(2020, 12, 29, 23,33,14,385995);
+	String type = "LODGING";
+	Double cost = 300.12;
+	String description = "Motel 6 stay for two nights";
+	String status = "approved";
+	Integer userID = 1;
+	Integer userID1 = 2;
+	
+	Ticket o = new Ticket(ticketID, date, type, cost, description, status, userID);
+	Ticket o1 = new Ticket(ticketID, date, type, cost, description, status, userID1);
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void test_view_all_pass() {
+		
+		boolean expected = false;
+		boolean actual = tServImp.viewAllTickets().isEmpty();
+		Assert.assertEquals(expected, actual);
+		}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void test_view_all_fail() {
+		
+		boolean expected = false;
+		boolean actual = tServImp.viewAllTickets().contains(o1);
+		Assert.assertEquals(expected, actual);
+		}
+
+}

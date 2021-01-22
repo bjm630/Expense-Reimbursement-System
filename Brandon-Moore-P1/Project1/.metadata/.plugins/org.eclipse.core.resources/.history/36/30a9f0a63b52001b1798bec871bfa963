@@ -1,0 +1,62 @@
+package com.revature.junitTests;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.revature.DAO.UserDao;
+import com.revature.DAO.UserDaoImp;
+import com.revature.models.User;
+import com.revature.service.UserService;
+import com.revature.service.UserServiceImp;
+
+import junit.framework.Assert;
+
+@RunWith(MockitoJUnitRunner.class)
+public class TestRegisterUser {
+	
+	@Mock
+	UserService uServ;
+	
+	@Mock
+	UserDao uDao;
+	
+	@InjectMocks
+	UserServiceImp uServImp = new UserServiceImp();
+	UserDaoImp uDaoImp = new UserDaoImp();
+	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void test_register_user_pass() {
+		
+		boolean expected = true;
+		boolean actual = uServImp.registerUser("sdf", "sdf", "xxx", "sdf");
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void test_register_user_fail() {
+		
+		boolean expected1 = false;
+		boolean actual1 = uServImp.registerUser("sdf", "sdf", "xxx", "sdf");
+		Assert.assertEquals(expected1, actual1);
+	}
+
+
+}

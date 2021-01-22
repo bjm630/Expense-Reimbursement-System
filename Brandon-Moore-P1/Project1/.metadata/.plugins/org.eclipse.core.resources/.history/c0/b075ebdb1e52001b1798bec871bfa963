@@ -1,0 +1,18 @@
+package com.revature.junitTests;
+
+import static org.junit.Assert.*;
+import com.revature.DAO.UserDaoImp;
+import com.revature.service.UserServiceImp;
+
+import org.junit.Test;
+
+public class TestUserRegistration {
+	
+	UserServiceImp.getInstance().registerUser();
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,65 @@
+package com.revature.service;
+
+import java.util.List;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.revature.DAO.TicketDaoImp;
+import com.revature.models.Ticket;
+
+public class TicketServiceImp implements TicketService {
+	
+	private static TicketService ticketServiceImp = new TicketServiceImp();
+	
+	private static Logger log = LogManager.getLogger(TicketServiceImp.class);
+	
+	public TicketServiceImp() {};
+	
+	public static TicketService getInstance() {
+		return ticketServiceImp;
+	}
+	
+	@Override
+	public boolean insertTicket(String type, String description, Double cost, Integer userID) {
+		log.info("insert ticket");
+		return TicketDaoImp.getInstance().insertTicket(type, description, cost, userID);
+	}
+
+	@Override
+	public List<Ticket> viewAllTickets() {
+		log.info("view all tickets");
+		return TicketDaoImp.getInstance().viewAllTickets();
+	}
+
+	@Override
+	public List<Ticket> viewAllTicketsByApproved() {
+		log.info("view all approved tickets");
+		return TicketDaoImp.getInstance().viewAllTicketsByApproved();
+	}
+
+	@Override
+	public List<Ticket> viewAllTicketsByDenied() {
+		log.info("view all denied tickets");
+		return TicketDaoImp.getInstance().viewAllTicketsByDenied();
+	}
+
+	@Override
+	public List<Ticket> viewAllTicketsByPending() {
+		log.info("view all pending tickets");
+		return TicketDaoImp.getInstance().viewAllTicketsByPending();
+	}
+
+	@Override
+	public List<Ticket> viewAllUserTickets(Integer userID) {
+		log.info("view all user tickets");
+		return TicketDaoImp.getInstance().viewAllUserTickets(userID);
+	}
+
+	@Override
+	public boolean changeTicketStatus(String status,Integer ticketID) {
+		log.info("change ticket status");
+		return TicketDaoImp.getInstance().changeTicketStatus(status,ticketID);
+	}
+
+}

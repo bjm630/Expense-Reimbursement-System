@@ -1,0 +1,35 @@
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+public class TestCalculator {
+
+	Calculator c = null;
+	
+	@Mock
+	CalculatorService service;
+		
+	
+	@Before
+	public void setUp() {
+		
+		c = new Calculator(service);
+		
+	}
+	
+	@Test
+	public void testPerform() {
+		
+		
+		when(service.add(2, 3)).thenReturn(5); //
+		assertEquals(10, c.perform(2, 3));
+		verify(service).add(2,3); //making sure you are using the service
+		
+	}
+
+}

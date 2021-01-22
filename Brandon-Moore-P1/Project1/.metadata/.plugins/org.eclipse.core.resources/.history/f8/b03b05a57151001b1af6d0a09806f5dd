@@ -1,0 +1,32 @@
+package com.revature.junitTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito.*;
+
+import com.revature.DAO.UserDao;
+import com.revature.service.UserService;
+import com.revature.service.UserServiceImp;
+
+public class RegisterUserTest {
+	
+		private UserServiceImp userServiceImp;
+		
+		private UserDao userDao;
+		
+		@Before
+		public void setup() {
+			
+			userServiceImp = new UserServiceImp();
+			
+		}
+		
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

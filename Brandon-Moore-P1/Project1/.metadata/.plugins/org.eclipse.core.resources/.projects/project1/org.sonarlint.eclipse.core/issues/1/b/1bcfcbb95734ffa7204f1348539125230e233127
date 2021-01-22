@@ -1,0 +1,19 @@
+
+Ί
+java:S1130"Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'java.io.IOException'.(θƒ¤xH«RMINORZ
+CODE_SMELL
+Ί
+java:S1130"Remove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonParseException' which is a subclass of 'java.io.IOException'.(Α€’ώÿÿÿÿH¬RMINORZ
+CODE_SMELL
+Α
+java:S1130"Remove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonParseException' which is a subclass of 'java.io.IOException'.(Π…μίϊÿÿÿÿ8θ―™§ν.H­RMINORZ
+CODE_SMELL
+΄
+java:S1130"Remove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonParseException' which is a subclass of 'java.io.IOException'.(θƒ¤xH®RMINORZ
+CODE_SMELL
+ΐ
+java:S1130"Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'java.io.IOException'.(Α€’ώÿÿÿÿH―RMINORZ
+CODE_SMELL
+Η
+java:S1130"Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'java.io.IOException'.(Π…μίϊÿÿÿÿ8θ―™§ν.H°RMINORZ
+CODE_SMELL

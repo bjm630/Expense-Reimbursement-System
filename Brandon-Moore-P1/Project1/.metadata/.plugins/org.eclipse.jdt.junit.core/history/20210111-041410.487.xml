@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestInsertTicket" project="project1" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.revature.junitTests.TestInsertTicket" time="2.061">
+    <testcase name="test_insert_ticket_fail" classname="com.revature.junitTests.TestInsertTicket" time="1.609"/>
+    <testcase name="test_insert_ticket_pass" classname="com.revature.junitTests.TestInsertTicket" time="0.452"/>
+  </testsuite>
+</testrun>

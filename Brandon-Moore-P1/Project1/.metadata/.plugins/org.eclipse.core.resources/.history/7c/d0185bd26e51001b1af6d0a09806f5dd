@@ -1,0 +1,22 @@
+package com.revature.junitTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import com.revature.DAO.UserDao;
+
+public class RegisterUser {
+	
+	UserDao userDao = Mockito.mock(UserDao.class);
+	
+	Mockito.when(userDao.registerUser(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString()))
+		.thenReturn(new Boolean("brandon", "moore", "brandon", "moore", true));
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

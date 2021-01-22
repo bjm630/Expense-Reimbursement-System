@@ -1,0 +1,13 @@
+
+T
+java:S1116"Remove this empty statement.(Ü±áµüÿÿÿÿ8ñÖŠ¨í.HîARMINORZ
+CODE_SMELL
+`
+java:S1700"(Rename field "employeeHomeControllerImp"(¡£ˆ…ıÿÿÿÿ8ñÖŠ¨í.HïARMAJORZ
+CODE_SMELL
+ 
+java:S1192&"jDefine a constant instead of duplicating this literal "http://localhost:8080/project1/index.html" 4 times.(ÀÂ£Í8Æú½Ïí.HğARCRITICALZ
+CODE_SMELL
+b
+java:S5411A"*Use the primitive boolean expression here.(ÂŸŸïúÿÿÿÿ8ÊøŞÎí.HõARMINORZ
+CODE_SMELL

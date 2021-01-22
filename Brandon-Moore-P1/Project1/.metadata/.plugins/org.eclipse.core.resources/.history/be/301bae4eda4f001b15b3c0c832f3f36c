@@ -1,0 +1,338 @@
+package com.revature.DAO;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.revature.models.Ticket;
+import com.revature.utilities.ConnectionFactory;
+
+public class TicketDaoImp implements TicketDao {
+	
+	private static TicketDao tDao;
+	
+	private TicketDaoImp() {};
+	
+	public static TicketDao getInstance() {
+		if(tDao == null) {
+				tDao = new TicketDaoImp();			
+		}
+		return tDao;
+	}
+
+	@Override
+	public boolean insertLodgingTicket(String description, Double cost, Integer userID) {
+		
+		//worked with database
+		
+		String callableSQL = "CALL insert_lodging_ticket (?,?,?)";
+		
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+			
+			CallableStatement cs = conn.prepareCall(callableSQL);
+			cs.setString(1, description);
+			cs.setDouble(2, cost);
+			cs.setInt(3, userID);
+			cs.execute();
+			
+			
+			if (cs.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return false;
+
+	}
+
+	@Override
+	public boolean insertTicket(String type, String description, Double cost, Integer userID) {
+
+		//worked with database
+		
+		String callableSQL = "CALL insert_travel_ticket (?,?,?,?)";
+		
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+			
+			CallableStatement cs = conn.prepareCall(callableSQL);
+			cs.setString(1, type);
+			cs.setString(2, description);
+			cs.setDouble(3, cost);
+			cs.setInt(4, userID);
+			cs.execute();
+			conn.close();
+			
+			if (cs.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return false;
+
+	}
+
+
+
+	@Override
+	public List<Ticket> viewAllTickets() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets;";
+		
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(tickets);
+		return tickets;
+	}
+
+	@Override
+	public List<Ticket> viewAllTicketsByApproved() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE status = 'approved' ;";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(tickets);
+		return tickets;
+
+	}
+	
+	@Override
+	public List<Ticket> viewAllTicketsByDenied() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE status = 'denied' ;";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(tickets);
+		return tickets;
+
+	}
+	
+	@Override
+	public List<Ticket> viewAllTicketsByPending() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE status = 'pending' ;";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(tickets);
+		return tickets;
+
+	}
+
+	@Override
+	public List<Ticket> viewAllUserTickets(Integer userID) {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE user_id =" + userID +";";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(tickets);
+		return tickets;
+
+	}
+
+	@Override
+	public boolean approveTicket(Integer ticketID) {
+		
+		//worked with database
+		
+		String schemaName = "Expenses";
+
+		String sql = "UPDATE " + schemaName +".tickets SET status = 'approved' WHERE ticket_id = ?";
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+			
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, ticketID);
+			ps.execute();
+			
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}	
+		return false;
+	}
+
+	@Override
+	public boolean denyTicket(Integer ticketID) {
+		
+		//worked with database
+		
+		String schemaName = "Expenses";
+
+		String sql = "UPDATE " + schemaName +".tickets SET status = 'denied' WHERE ticket_id = ?";
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+			
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, ticketID);
+			ps.execute();
+			
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}	
+		return false;
+	}
+
+}

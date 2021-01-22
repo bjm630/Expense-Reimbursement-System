@@ -1,0 +1,290 @@
+package com.revature.DAO;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import com.revature.models.Ticket;
+import com.revature.utilities.ConnectionFactory;
+
+public class TicketDaoImp implements TicketDao {
+	
+	private static TicketDao tDao;
+	
+	private static Logger log = LogManager.getLogger(TicketDaoImp.class);
+	
+	public TicketDaoImp() {};
+	
+	public static TicketDao getInstance() {
+		if(tDao == null) {
+				tDao = new TicketDaoImp();			
+		}
+		return tDao;
+	}
+
+
+	@Override
+	public boolean insertTicket(String type, String description, Double cost, Integer userID) {
+
+		//worked with database
+		
+		String callableSQL = "CALL insert_ticket (?,?,?,?)";
+		
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+			
+			CallableStatement cs = conn.prepareCall(callableSQL);
+			cs.setString(1, type);
+			cs.setString(2, description);
+			cs.setDouble(3, cost);
+			cs.setInt(4, userID);
+			cs.execute();
+		
+			
+			if (cs.executeUpdate() < 0) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			log.error(e);
+			
+		}catch (NullPointerException e) {
+			log.error(e);
+		}
+		return false;
+
+	}
+
+
+
+	@Override
+	public List<Ticket> viewAllTickets() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets ORDER BY ticket_ID;";
+		
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return tickets;
+	}
+
+	@Override
+	public List<Ticket> viewAllTicketsByApproved() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE status = 'approved' ORDER BY ticket_ID;";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			log.error(e);
+		}
+	
+		return tickets;
+
+	}
+	
+	@Override
+	public List<Ticket> viewAllTicketsByDenied() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE status = 'denied' ORDER BY ticket_ID;";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			log.error(e);
+		}
+	
+		return tickets;
+
+	}
+	
+	@Override
+	public List<Ticket> viewAllTicketsByPending() {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE status = 'pending' ORDER BY ticket_ID;";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			log.error(e);
+		}
+	
+		return tickets;
+
+	}
+
+	@Override
+	public List<Ticket> viewAllUserTickets(Integer userID) {
+		
+		//worked with database
+
+		List<Ticket> tickets = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".tickets WHERE user_id =" + userID +" ORDER BY ticket_ID;";
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				tickets.add(new Ticket(
+				rs.getInt("ticket_id"),	
+				rs.getTimestamp("date"),
+				rs.getString("type"),
+				rs.getDouble("cost"),
+				rs.getString("description"),
+				rs.getString("status"),
+				rs.getInt("user_id")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			log.error(e);
+		}
+	
+		return tickets;
+
+	}
+
+	@Override
+	public boolean changeTicketStatus (String status, Integer ticketID) {
+		
+		//worked with database
+		
+		String schemaName = "Expenses";
+
+		String sql = "UPDATE " + schemaName +".tickets SET status = ? WHERE ticket_id = ?";
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+			
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, status);
+			ps.setInt(2, ticketID);
+			ps.execute();
+			
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			
+			log.error(e);
+		} catch (NullPointerException e) {
+			log.error(e);
+		}
+		return false;
+	}
+
+}

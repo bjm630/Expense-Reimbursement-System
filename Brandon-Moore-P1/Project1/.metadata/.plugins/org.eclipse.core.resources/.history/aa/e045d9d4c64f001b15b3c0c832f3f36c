@@ -1,0 +1,51 @@
+package com.revature.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.revature.ajax.ClientMessage;
+import com.revature.service.UserServiceImp;
+
+import com.revature.models.User;
+
+
+public class UserControllerImp implements UserController {
+
+		private static UserController userControllerImp = new UserControllerImp();
+		
+		private UserControllerImp() {}
+		
+		public static UserController getInstance() {
+			return userControllerImp;
+		}
+	@Override
+	public Object register(HttpServletRequest request) {
+		if (request.getMethod().equals("POST")) {
+			return "index.html";
+		}
+		
+		User user = new User(0, request.getParameter("firstName"), request.getParameter("lastName"),
+				request.getParameter("username"), request.getParameter("password"), false);
+		
+		if (UserServiceImp.getInstance().registerUser(user.getFirstName(), user.getLastName(),
+				user.getUsername(), user.getPassword())) {
+			return new ClientMessage("REGISTRATION SUCCESSFUL");
+		}else {
+			return new ClientMessage("SOMETHING WENT WRONG");
+		}
+		
+	}
+
+	@Override
+	public Object getAllUsers(HttpServletRequest request) {
+		
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+			
+		
+			if(loggedUser == null) {
+				return "login.html";
+			}
+			
+		return null;
+	}
+
+}

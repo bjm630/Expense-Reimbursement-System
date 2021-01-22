@@ -1,0 +1,82 @@
+package com.revature.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.revature.utilities.ConnectionFactory;
+
+public class EmployeeHomeControllerImp implements EmployeeHomeController {
+	
+	private static Logger log = LogManager.getLogger(EmployeeHomeControllerImp.class);
+	
+	private static EmployeeHomeController employeeHomeControllerImp = new EmployeeHomeControllerImp();
+	
+	private EmployeeHomeControllerImp() {};
+	
+	public static EmployeeHomeController getInstance() {
+	return employeeHomeControllerImp;
+	}
+
+	@Override
+	public void employeeHome(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			log.info("employee home");
+		
+		try {
+		
+			if((request.getSession(false) != null) && (((Integer)request.getSession().getAttribute("userID")) > 0)) {
+				
+				log.info("logging in");
+				
+				response.sendRedirect("http://localhost:8080/project1/employeeHome.html");
+				
+			}}catch(NullPointerException e) {
+				response.sendRedirect("http://localhost:8080/project1/index.html");
+				log.error(e);
+				log.info("did not login");
+			}
+
+	}
+
+	@Override
+	public void resetToLanding(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			log.info("resetToLanding");
+		
+		RequestDispatcher redis = request.getRequestDispatcher("http://localhost:8080/project1/index.html");
+		redis.forward(request, response);
+
+	}
+
+	@Override
+	public void managerHome(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			log.info("manager home");
+		
+			if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("manager"))) {
+				
+				log.info("logging in");
+			
+			response.sendRedirect("http://localhost:8080/project1/managerHome.html");
+			
+		}else {
+			response.sendRedirect("http://localhost:8080/project1/index.html");
+			
+				log.info("did not log in");
+		}
+
+}
+		
+	}
+
+

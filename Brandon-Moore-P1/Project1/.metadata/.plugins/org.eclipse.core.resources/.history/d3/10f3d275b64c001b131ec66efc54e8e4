@@ -1,0 +1,61 @@
+package com.revature.controller;
+
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.ajax.ClientMessage;
+import com.revature.service.UserServiceImp;
+
+import com.revature.models.User;
+
+
+public class LoginControllerImp implements LoginController {
+
+	UserServiceImp uSImp = new UserServiceImp();
+	
+	private static LoginController loginControllerImp = new LoginControllerImp();
+	
+	private LoginControllerImp() {};
+	
+	public static LoginController getInstance() {
+		return loginControllerImp;
+}
+	
+	@Override
+	public void login(HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException { 
+			
+		if(request.getMethod().equals("POST")) {
+			
+			System.out.println(request.toString());
+			System.out.println(request.getMethod().toString());
+			
+			ObjectMapper om = new ObjectMapper();
+			
+			System.out.println(request.getReader());
+			
+			User user = om.readValue(request.getReader(),com.revature.models.User.class);
+			
+			String username = user.getUsername();
+			String password = user.getPassword();
+				
+			uSImp.userLogin(username, password);
+			
+			}	
+	
+	}
+			
+
+	@Override
+	public String logout(HttpServletRequest request) {
+		
+		request.getSession().invalidate();
+		
+		return "login.html";
+	}
+
+}

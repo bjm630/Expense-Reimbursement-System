@@ -1,0 +1,46 @@
+package com.revature.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class EmployeeHomeControllerImp implements EmployeeHomeController {
+	
+	private static EmployeeHomeController employeeHomeControllerImp = new EmployeeHomeControllerImp();
+	
+	private EmployeeHomeControllerImp() {};
+	
+	public static EmployeeHomeController getInstance() {
+	return employeeHomeControllerImp;
+	}
+
+	@Override
+	public void employeeHome(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			System.out.println((request.getSession(false) != null));
+			System.out.println(((Boolean)request.getSession().getAttribute("userID")));
+		
+			if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("employee"))) {
+				
+				System.out.println("Logging In");
+				
+				RequestDispatcher reDis = request.getRequestDispatcher("/index.html");
+				
+				reDis.forward(request, response);
+				
+			}
+
+	}
+
+	@Override
+	public void resetToLanding(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=project1/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.revature.service{UserService.java[UserService" modifiers="513" timestamp="1609889354777"/>
+    <typeInfo handle="=project1/C:\/Users\/bjm63\/Downloads\/sts-4.8.1.RELEASE\/plugins\/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.0.v20201014-1246\/jre\/lib\/jrt-fs.jar`java.base=/maven.pomderived=/true=/&lt;java.nio.file.attribute(UserPrincipal.class[UserPrincipal" modifiers="1537" timestamp="1607286115502"/>
+    <typeInfo handle="=project1/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.revature.controller{LoginController.java[LoginController" modifiers="513" timestamp="1609889633644"/>
+    <typeInfo handle="=project1/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.revature.controller{UserController.java[UserController" modifiers="513" timestamp="1609900623589"/>
+    <typeInfo handle="=project1/C:\/Users\/bjm63\/Downloads\/sts-4.8.1.RELEASE\/plugins\/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.0.v20201014-1246\/jre\/lib\/jrt-fs.jar`java.desktop=/maven.pomderived=/true=/&lt;java.awt.desktop(UserSessionListener.class[UserSessionListener" modifiers="1537" timestamp="1607286115502"/>
+    <typeInfo handle="=project1/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.revature.service{TicketService.java[TicketService" modifiers="513" timestamp="1609914771831"/>
+    <typeInfo handle="=project1/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.revature.controller{TicketController.java[TicketController" modifiers="513" timestamp="1610077154260"/>
+    <typeInfo handle="=project1/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.revature.controller{EmployeeHomeController.java[EmployeeHomeController" modifiers="513" timestamp="1609972270415"/>
+</typeInfoHistroy>

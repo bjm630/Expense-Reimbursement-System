@@ -1,0 +1,31 @@
+package com.revature.controller;
+
+import javax.servlet.http.HttpServlet;
+
+public class LoginControllerImp implements LoginController {
+
+	private static LoginController loginControllerImp = new LoginControllerImp();
+	
+	private LoginControllerImp() {};
+	
+	public static LoginController getInstance() {
+		return loginControllerImp;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public Object login(HttpServlet request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String logout(HttpServlet request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

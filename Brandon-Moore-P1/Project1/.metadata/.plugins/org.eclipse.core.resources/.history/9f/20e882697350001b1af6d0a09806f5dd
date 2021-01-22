@@ -1,0 +1,83 @@
+package com.revature.service;
+
+import java.util.List;
+
+import com.revature.DAO.UserDaoImp;
+import com.revature.models.User;
+
+public class UserServiceImp implements UserService {
+
+	private static UserService userServiceImp = new UserServiceImp();
+	
+	public UserServiceImp() {};
+	
+	public static UserService getInstance() {
+		return userServiceImp;
+	}
+	
+	//worked with the database
+	@Override
+	public boolean registerUser(String firstName, String lastName, String username, String password) {
+			
+		return UserDaoImp.getInstance().insertEmployee(firstName, lastName, username, password);
+	}
+	//worked with the database
+	@Override
+	public boolean registerManager(String firstName, String lastName, String username, String password) {
+		
+		return UserDaoImp.getInstance().insertManager(firstName, lastName, username, password);
+	}
+	//worked with the database
+	@Override
+	public List<User> viewUser(String username) {
+	
+		return UserDaoImp.getInstance().viewUser(username);
+	}
+	//worked with the database
+	@Override
+	public boolean userLogin(String username, String password) {
+		
+		List<User> loggedUser = UserDaoImp.getInstance().viewUser(username);
+		
+		try {
+		
+		if((loggedUser.get(0).getUsername().equals(username)) && (loggedUser.get(0).getPassword().equals(password))) {
+			
+		//	User user = loggedUser.get(0);
+		//	System.out.println(user);
+			
+			System.out.println("Login Successful");
+			return true;	
+		} 
+			
+
+		} catch(IndexOutOfBoundsException e) {
+			
+			
+			
+		}
+		return false;
+		
+		
+	}
+
+	@Override
+	public boolean managerLogin(String username, String password) {
+		
+		List<User> loggedUser = UserDaoImp.getInstance().viewUser(username);
+		
+		if((loggedUser.get(0).getUsername().equals(username)) && (loggedUser.get(0).getPassword().equals(password))
+					&& (loggedUser.get(0).getManager().equals(true))) {
+			
+		//	User user = loggedUser.get(0);
+		//	System.out.println(user);
+			
+			System.out.println("Login Successful");
+			return true;	
+		} else {
+			System.out.println("Login Unsuccessful");
+			return false;
+		}
+	}
+
+}

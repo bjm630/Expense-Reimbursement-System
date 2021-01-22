@@ -1,0 +1,58 @@
+package com.revature.request;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.revature.service.UserServiceImp;
+
+
+public class DispatcherServlet extends HttpServlet{
+	
+	private static Logger log = LogManager.getLogger(DispatcherServlet.class);
+	
+	public void init() throws ServletException{
+		log.info("servlet initialized");
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+			System.out.println("Inside Dispatcher Servlet Get Method!");
+			
+			RequestHelper.process(request, response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			
+			System.out.println("Inside Dispatcher Servlet Post Method!");
+			
+			RequestHelper.process(request, response);
+	}
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		System.out.println("Inside Dispatcher Servlet Put Method!");
+		
+		RequestHelper.process(request, response);
+}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		System.out.println("Inside Dispatcher Servlet Delete Method!");
+		
+		RequestHelper.process(request, response);
+}
+	
+	public void destroy() {
+		System.out.println("The servlet has been destroyed");
+	}
+	
+	
+}

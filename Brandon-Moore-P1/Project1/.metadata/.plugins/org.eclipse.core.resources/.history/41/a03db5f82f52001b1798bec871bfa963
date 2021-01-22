@@ -1,0 +1,132 @@
+package com.revature.DAO;
+
+import java.sql.CallableStatement;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.revature.models.User;
+
+import com.revature.utilities.ConnectionFactory;
+
+public class UserDaoImp implements UserDao {
+	
+	private static UserDao uDao;
+	
+	private static Logger log = LogManager.getLogger(UserDaoImp.class);
+	
+	public UserDaoImp() {};
+	
+	public static UserDao getInstance() {
+		if(uDao == null) {
+				uDao = new UserDaoImp();			
+		}
+		return uDao;
+	}
+
+	@Override
+	public boolean insertEmployee(String firstName, String lastName, String username, String password) {
+		
+		//worked with database
+		
+		String callableSQL = "CALL insert_employee (?,?,?,?)";
+		
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+			
+			CallableStatement cs = conn.prepareCall(callableSQL);
+			cs.setString(1, firstName);
+			cs.setString(2, lastName);
+			cs.setString(3, username);
+			cs.setString(4, password);
+			cs.execute();
+			cs.close();
+			System.out.println(cs.getUpdateCount());
+			
+			if(cs.getUpdateCount()==0) {
+				return true;
+			}else {return false;}
+		
+
+		} catch (SQLException e) {
+			log.error(e);
+	
+		}
+	
+
+	}
+
+	@Override
+	public boolean insertManager(String firstName, String lastName, String username, String password) {
+
+		//worked with database
+		
+		String callableSQL = "CALL insert_manager (?,?,?,?)";
+		
+		
+		try (Connection conn = ConnectionFactory.getConnection()){
+	
+			CallableStatement cs = conn.prepareCall(callableSQL);
+			cs.setString(1, firstName);
+			cs.setString(2, lastName);
+			cs.setString(3, username);
+			cs.setString(4, password);
+			cs.execute();
+			conn.close();
+			
+			if (cs.executeUpdate() > 0) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			log.error(e);
+		}
+		return false;
+	}
+
+	@Override
+	public List<User> viewUser(String username) {
+		
+		//worked with database
+		
+		List<User> users = new ArrayList<>();
+		
+		String schemaName = "Expenses";
+		
+		String sql = "SELECT * FROM " + schemaName + ".users WHERE username = '" + username +"';";
+		
+		
+		try(Connection conn = ConnectionFactory.getConnection()){
+			
+			Statement s = conn.createStatement();
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				users.add(new User(
+				rs.getInt("user_id"),	
+				rs.getString("first_name"),
+				rs.getString("last_name"),
+				rs.getString("username"),
+				rs.getString("password"),
+				rs.getBoolean("manager")
+						));
+						
+			}
+		conn.close();
+			
+		} catch (SQLException e) {
+			log.error(e);
+		}
+	//	System.out.println(users);
+		return users;
+	}
+
+}

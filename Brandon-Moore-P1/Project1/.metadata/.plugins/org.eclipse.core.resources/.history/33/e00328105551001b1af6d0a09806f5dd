@@ -1,0 +1,290 @@
+package com.revature.controller;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.models.Ticket;
+import com.revature.service.TicketServiceImp;
+
+public class TicketControllerImp implements TicketController {
+	
+	private static Logger log = LogManager.getLogger(TicketControllerImp.class);
+	
+	private static TicketController ticketControllerImp = new TicketControllerImp();
+	
+	private TicketControllerImp() {}
+	
+	public static TicketController getInstance() {
+		return ticketControllerImp;
+	}
+
+	@Override //worked in postman
+	public void insertTicket(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+		log.info("insert ticket");
+		
+		if((request.getSession(false) != null) && (((Integer)request.getSession().getAttribute("userID")) > 0)) {
+		
+		if(request.getMethod().equals("POST")) {
+			
+			log.info("confirmed post method");
+			
+			log.info(request.getSession().getAttribute("userID"));
+			
+			response.setContentType("application/json");
+			
+			String type = request.getParameter("type");
+			String description = request.getParameter("description");
+			Double cost = Double.parseDouble(request.getParameter("cost"));
+			Integer userID = (Integer) request.getSession().getAttribute("userID");
+			
+			TicketServiceImp.getInstance().insertTicket(type, description, cost, userID);
+			EmployeeHomeControllerImp.getInstance().employeeHome(request, response);
+			
+			log.info("ticket inserted");
+			response.setStatus(201);
+		} else {
+			
+			log.info("method not post");
+			response.setStatus(405);
+		}
+		}else {
+			response.sendRedirect("http://localhost:8080/project1/index.html");
+			
+			log.info("did not have session");}
+	}
+
+	@Override // Works in Postman
+	public void viewAll(HttpServletRequest request, HttpServletResponse response)
+
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+			log.info("view all");
+			
+			if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("manager"))) {
+		
+			if(request.getMethod().equals("POST")) {
+				
+				log.info("confimed post");
+				
+				List<Ticket> tickets = null;
+				
+				response.setContentType("application/json");
+				
+				ObjectMapper om = new ObjectMapper();
+				
+				tickets = TicketServiceImp.getInstance().viewAllTickets();
+				
+				response.getWriter().write(om.writeValueAsString(tickets));
+				
+				log.info("tickets written to response");
+				
+				} else {
+					
+					log.info("method not post");
+					response.setStatus(405);
+				}
+			}else {
+				
+				response.setStatus(403);
+				EmployeeHomeControllerImp.getInstance().resetToLanding(request, response);
+				
+				log.info("did not have session");}
+	}
+
+	@Override // Works in Postman
+	public void viewAllApproved(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+			log.info("view all approved");
+			
+			if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("manager"))) {
+		
+			if(request.getMethod().equals("POST")) {
+				
+				log.info("confirmed post");
+			
+				List<Ticket> tickets = null;
+				
+				response.setContentType("application/json");
+				
+				ObjectMapper om = new ObjectMapper();
+				
+				tickets = TicketServiceImp.getInstance().viewAllTicketsByApproved();
+				
+				response.getWriter().write(om.writeValueAsString(tickets));
+				
+				log.info("tickets written to response");
+				
+				} else {
+					
+					log.info("method not post");
+					response.setStatus(405);
+				}
+			}else {
+				response.sendRedirect("http://localhost:8080/project1/index.html");
+				
+				log.info("did not have session");}
+	}
+
+	@Override //Works in Postman
+	public void viewAllDenied(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+		log.info("view all denied");
+		
+		if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("manager"))) {
+	
+			if(request.getMethod().equals("POST")) {
+				
+				log.info("post confirmed");
+			
+				List<Ticket> tickets = null;
+				
+				response.setContentType("application/json");
+				
+				ObjectMapper om = new ObjectMapper();
+				
+				tickets = TicketServiceImp.getInstance().viewAllTicketsByDenied();
+				
+				response.getWriter().write(om.writeValueAsString(tickets));
+				
+				log.info("tickets written to response");
+				
+				} else {
+					log.info("method not post");
+					response.setStatus(405);
+				}
+		}else {
+			response.sendRedirect("http://localhost:8080/project1/index.html");
+			
+			log.info("did not have session");}
+		
+	}
+
+	@Override //works in postman
+	public void viewAllPending(HttpServletRequest request, HttpServletResponse response)
+			throws  IOException, ServletException {
+		
+			log.info("view all pending");
+			
+			if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("manager"))) {
+		
+			if(request.getMethod().equals("POST")) {
+				
+				log.info("post confirmed");
+				
+			List<Ticket> tickets = null;
+				
+			response.setContentType("application/json");
+			
+			ObjectMapper om = new ObjectMapper();
+			
+			tickets = TicketServiceImp.getInstance().viewAllTicketsByPending();
+			
+			response.getWriter().write(om.writeValueAsString(tickets));
+			
+			log.info("tickets written to response");
+			
+			} else {
+				response.setStatus(405);
+				log.info("method not post");
+			}
+			}else {
+				EmployeeHomeControllerImp.getInstance().resetToLanding(request, response);
+				
+				log.info("did not have session");}
+	}
+
+	@Override //worked in postman
+	public void viewAllUser(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			log.info("view all user tickets");
+			
+			if((request.getSession(false) != null) && (((Integer)request.getSession().getAttribute("userID")) > 0)) {
+		
+			HttpSession session = request.getSession();
+			session.getAttribute("userID");
+			
+			log.info("confirming session");
+		
+			if(request.getMethod().equals("POST")) {
+				
+				log.info("confirm post");
+				
+			List<Ticket> tickets = null;
+				
+			response.setContentType("application/json");
+				
+			Integer userID = (Integer) session.getAttribute("userID");
+			
+			ObjectMapper om = new ObjectMapper();
+			
+			tickets = TicketServiceImp.getInstance().viewAllUserTickets(userID);
+			
+			response.getWriter().write(om.writeValueAsString(tickets));
+			
+			log.info("tickets written to response");
+			
+			} else {
+				response.setStatus(405);
+				log.info("method not post");
+			}
+			}else {
+				EmployeeHomeControllerImp.getInstance().resetToLanding(request, response);
+				
+				log.info("did not have session");
+		}
+	}
+
+	@Override //worked in postman
+	public void changeTicketStatus(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			// need to confirm session maybe?
+			log.info("change ticket status");
+			
+			if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("manager"))) {
+		
+			if(request.getMethod().equals("POST")) {
+				
+			log.info("post confirmed");
+					
+			response.setContentType("application/json");
+			
+			String status = (request.getParameter("status"));
+			Integer ticketID = Integer.parseInt(request.getParameter("ticketID"));
+			
+			TicketServiceImp.getInstance().changeTicketStatus(status, ticketID);
+			
+			EmployeeHomeControllerImp.getInstance().managerHome(request, response);
+			
+			log.info("ticket status has been changed");
+			
+			response.setStatus(204);
+		} else {
+			response.setStatus(405);
+			log.info("method not post");
+		}
+
+	}else {
+		EmployeeHomeControllerImp.getInstance().resetToLanding(request, response);
+		
+		log.info("did not have session");
+	
+}
+
+	}
+}

@@ -1,0 +1,23 @@
+
+s
+java:S2095f"GUse try-with-resources or close this "Statement" in a "finally" clause.(¬ÿÂìøÿÿÿÿHÙBRBLOCKERZBUG
+“
+java:S4087L"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(…¤© ÿÿÿÿÿHÚBRMINORZ
+CODE_SMELL
+Š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(â½œáıÿÿÿÿHÛBRMINORZ
+CODE_SMELL
+v
+java:S2095,"OUse try-with-resources or close this "CallableStatement" in a "finally" clause.(ÆúÃHÜBRBLOCKERZBUG
+M
+java:S1116"Remove this empty statement.(¢›ªüÿÿÿÿHİBRMINORZ
+CODE_SMELL
+¼
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢›ªüÿÿÿÿ8¾ã§î.HŞBRCRITICALZ
+CODE_SMELL
+g	java:S125z"<This block of commented-out lines of code should be removed.(â¤„ÙHßBRMAJORZ
+CODE_SMELL
+š
+java:S4087u"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(…¤© ÿÿÿÿÿ8á°Û¬î.HàBRMINORZ
+CODE_SMELL
+v
+java:S2095F"OUse try-with-resources or close this "CallableStatement" in a "finally" clause.(ÆúÃHáBRBLOCKERZBUG

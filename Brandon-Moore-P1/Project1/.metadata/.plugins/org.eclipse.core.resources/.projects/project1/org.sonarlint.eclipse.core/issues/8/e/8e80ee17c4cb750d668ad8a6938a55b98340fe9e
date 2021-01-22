@@ -1,0 +1,62 @@
+
+w
+java:S1192Z"HDefine a constant instead of duplicating this literal "user_id" 5 times.(ÎÒëHåBRCRITICALZ
+CODE_SMELL
+w
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÀÖĞ½HëBRBLOCKERZBUG
+“
+java:S4087^"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(…¤© ÿÿÿÿÿHìBRMINORZ
+CODE_SMELL
+t
+java:S2095Â"GUse try-with-resources or close this "Statement" in a "finally" clause.(¬ÿÂìøÿÿÿÿHíBRBLOCKERZBUG
+w
+java:S21479"DCombine this catch with the one at line 54, which has the same body.(ßÈ´8Èë’Ğí.HîBRMINORZ
+CODE_SMELL
+}
+java:S1192G"IDefine a constant instead of duplicating this literal "Expenses" 6 times.(Ş°ô§ùÿÿÿÿHğBRCRITICALZ
+CODE_SMELL
+H
+java:S1116"Remove this empty statement.(ï«ÚïH÷BRMINORZ
+CODE_SMELL
+s
+java:S2095N"GUse try-with-resources or close this "Statement" in a "finally" clause.(¬ÿÂìøÿÿÿÿHøBRBLOCKERZBUG
+}
+java:S1192I"ODefine a constant instead of duplicating this literal "SELECT * FROM " 5 times.(ù¶âsHùBRCRITICALZ
+CODE_SMELL
+s
+java:S2095t"GUse try-with-resources or close this "Statement" in a "finally" clause.(¬ÿÂìøÿÿÿÿHÿBRBLOCKERZBUG
+y
+java:S1192T"JDefine a constant instead of duplicating this literal "ticket_id" 5 times.(®èĞH€CRCRITICALZ
+CODE_SMELL
+”
+java:S4087„"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(…¤© ÿÿÿÿÿH†CRMINORZ
+CODE_SMELL
+y
+java:S2147›"ECombine this catch with the one at line 280, which has the same body.(ßÈ´8çÏóÏí.H‡CRMINORZ
+CODE_SMELL
+t
+java:S2095›"GUse try-with-resources or close this "Statement" in a "finally" clause.(¬ÿÂìøÿÿÿÿH‰CRBLOCKERZBUG
+u
+java:S1192Y"GDefine a constant instead of duplicating this literal "status" 5 times.(Ú¨Á{HŠCRCRITICALZ
+CODE_SMELL
+”
+java:S4087Ò"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(…¤© ÿÿÿÿÿHCRMINORZ
+CODE_SMELL
+”
+java:S4087«"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(…¤© ÿÿÿÿÿH‘CRMINORZ
+CODE_SMELL
+·
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ï«Úï8Îğ­î.H’CRCRITICALZ
+CODE_SMELL
+›
+java:S4087ù"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(…¤© ÿÿÿÿÿ8î‡°í.H“CRMINORZ
+CODE_SMELL
+v
+java:S2095*"OUse try-with-resources or close this "CallableStatement" in a "finally" clause.(ÆúÃH”CRBLOCKERZBUG
+{
+java:S1192X"LDefine a constant instead of duplicating this literal "description" 5 times.(¡‚ÍH•CRCRITICALZ
+CODE_SMELL
+Š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(â½œáıÿÿÿÿH›CRMINORZ
+CODE_SMELL
+t
+java:S2095é"GUse try-with-resources or close this "Statement" in a "finally" clause.(¬ÿÂìøÿÿÿÿHœCRBLOCKERZBUG

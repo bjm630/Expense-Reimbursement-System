@@ -1,0 +1,31 @@
+package com.revature.request;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
+import com.revature.controller.LoginControllerImp;
+import com.revature.controller.UserControllerImp;
+
+public class RequestHelper {
+	
+	private RequestHelper() {}
+		
+		public static Object process(HttpServletRequest request) {
+			
+			switch(request.getRequestURI()) {
+			case "/FrontController/login.do":
+				return LoginControllerImp.getInstance().login(request);
+			case "/FrontController/logout.do":
+				return LoginControllerImp.getInstance().logout(request);
+			case "/FrontController/register.do":
+				return UserControllerImp.getInstance().register(request);
+			case "/FrontController/getAll.do":
+				return UserControllerImp.getInstance().getAllUsers(request);
+			default:
+				return "not-implemented.html";
+				
+			}
+		
+	}
+
+}

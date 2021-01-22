@@ -1,0 +1,43 @@
+
+
+java:S1192="UDefine a constant instead of duplicating this literal "did not have session" 7 times.(«Ë°òùÿÿÿÿ8˜Ğûí.Hù?RCRITICALZ
+CODE_SMELL
+b
+java:S5411G"*Use the primitive boolean expression here.(ÂŸŸïúÿÿÿÿ8˜Ğûí.H@RMINORZ
+CODE_SMELL
+S
+java:S1700""Rename field "ticketControllerImp"(ÿ‰µ’ÿÿÿÿÿH‚@RMAJORZ
+CODE_SMELL
+ 
+java:S1192;"jDefine a constant instead of duplicating this literal "http://localhost:8080/project1/index.html" 3 times.(ÀÂ£Í8•›òûí.Hƒ@RCRITICALZ
+CODE_SMELL
+†
+java:S11927"PDefine a constant instead of duplicating this literal "method not post" 7 times.(ÉĞ²ß8™ú¸ñí.H‡@RCRITICALZ
+CODE_SMELL
+€
+java:S1192)"QDefine a constant instead of duplicating this literal "application/json" 7 times.(ªŞÃıH@RCRITICALZ
+CODE_SMELL
+—
+java:S1192W"\Define a constant instead of duplicating this literal "tickets written to response" 5 times.(Úš™¦üÿÿÿÿ8™ú¸ñí.H—@RCRITICALZ
+CODE_SMELL
+c
+java:S5411"*Use the primitive boolean expression here.(ÂŸŸïúÿÿÿÿ8˜Ğûí.H@RMINORZ
+CODE_SMELL
+c
+java:S5411²"*Use the primitive boolean expression here.(ÂŸŸïúÿÿÿÿ8ÖåÚûí.H@RMINORZ
+CODE_SMELL
+‚
+java:S1192!"GDefine a constant instead of duplicating this literal "userID" 6 times.(»¥êúÿÿÿÿ8ô©«±í.HŸ@RCRITICALZ
+CODE_SMELL
+‹
+java:S1192“"ODefine a constant instead of duplicating this literal "post confirmed" 3 times.(š˜Û¬üÿÿÿÿ8óõ›ıí.H¦@RCRITICALZ
+CODE_SMELL
+ƒ
+java:S1192G"HDefine a constant instead of duplicating this literal "manager" 5 times.(ÂŸŸïúÿÿÿÿ8˜Ğûí.Hª@RCRITICALZ
+CODE_SMELL
+b
+java:S5411l"*Use the primitive boolean expression here.(ÂŸŸïúÿÿÿÿ8˜Ğûí.H°@RMINORZ
+CODE_SMELL
+c
+java:S5411"*Use the primitive boolean expression here.(ÂŸŸïúÿÿÿÿ8ø¶½ûí.H±@RMINORZ
+CODE_SMELL

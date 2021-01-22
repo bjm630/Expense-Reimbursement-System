@@ -1,0 +1,23 @@
+
+
+
+public class Calculator {
+	
+	CalculatorService service;
+	
+	public Calculator(CalculatorService service) {
+		
+		this.service = service;
+	}
+	
+	public int perform(int i, int j) // 2 -3 -> (i+j)*2
+										
+									// we are testing the add method, we are testing perform, add is the service.
+	{
+		
+		return service.add(i , j)*i;
+	}
+		
+	
+
+}

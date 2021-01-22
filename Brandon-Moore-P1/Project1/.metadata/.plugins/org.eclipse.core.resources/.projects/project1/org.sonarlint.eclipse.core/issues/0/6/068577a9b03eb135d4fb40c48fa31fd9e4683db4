@@ -1,0 +1,31 @@
+
+M
+java:S1700"!Rename field "loginControllerImp"(¤…¤»HÅRMAJORZ
+CODE_SMELL
+À
+java:S1130S"Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'java.io.IOException'.(ˆË³ÇúÿÿÿÿHÁRMINORZ
+CODE_SMELL
+H
+java:S1116"Remove this empty statement.(ìİŒÇHÑRMINORZ
+CODE_SMELL
+º
+java:S1130g"ˆRemove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonParseException' which is a subclass of 'java.io.IOException'.(î¥“ÈûÿÿÿÿHÌRMINORZ
+CODE_SMELL
+`
+java:S11251"(Remove the literal "true" boolean value.(ğ†Ãøÿÿÿÿ8ì…¢§í.HÄRMINORZ
+CODE_SMELL
+Ç
+java:S1130g"Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'java.io.IOException'.(î¥“Èûÿÿÿÿ8ì…¢§í.HËRMINORZ
+CODE_SMELL
+Y
+java:S1125v"(Remove the literal "true" boolean value.(¨åØÆüÿÿÿÿHÊRMINORZ
+CODE_SMELL
+»
+java:S1130$"ˆRemove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonParseException' which is a subclass of 'java.io.IOException'.(üÕı{8ì…¢§í.HÇRMINORZ
+CODE_SMELL
+º
+java:S1130S"ˆRemove the declaration of thrown exception 'com.fasterxml.jackson.core.JsonParseException' which is a subclass of 'java.io.IOException'.(ˆË³ÇúÿÿÿÿHÎRMINORZ
+CODE_SMELL
+º
+java:S1130$"Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'java.io.IOException'.(üÕı{HÆRMINORZ
+CODE_SMELL

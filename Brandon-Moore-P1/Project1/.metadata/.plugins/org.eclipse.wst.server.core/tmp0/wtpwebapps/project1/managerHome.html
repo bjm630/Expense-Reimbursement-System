@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+   
+    <link rel="stylesheet" href="Style.css"/>
+    <meta charset="ISO-8859-1">
+    <title>Manager Home</title>
+</head>
+<body>
+
+
+
+  <div class = "row">
+    <div class = "col-md-2">   
+    </div>
+
+    
+        <div class = "col-md-8">
+            <h1>Manager Home</h1>
+        </div>
+   
+
+   
+      <div class = "col-md-2">   
+      </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-5">   
+    </div>
+        <div text-align = "center" class = "d-grid gap-2 col-2 mx-auto">
+          <form method="GET" action = "http://localhost:8080/project1/FrontController/logout">
+            <button text-align = "center" type="submit" class="btn btn-primary">Logout</button>
+          </form>
+        </div>
+      <div class = "col-md-4">   
+      </div>
+  </div>
+
+  <br>
+
+    <div class = "row">
+            <div class = "col-md-2">   
+            </div>
+        
+        <div class = "col-md-8" >
+          <table id = "tickets-table" class="table table-info table-striped table-bordered caption-top">
+                <caption><h3>Reimbursement Tickets:</h3></caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Ticket ID #</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Cost ($)</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Employee ID #</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+
+              <script type="text/javascript">
+                const ticketsBody = document.querySelector("#tickets-table > tbody");
+                function loadTickets(){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function(){
+                      console.log("changing my readystate " + xhttp.readyState);
+                      if(xhttp.readyState == 4 && xhttp.status == 200){
+                        let json = JSON.parse(xhttp.responseText);
+                        xhttp.onload = () => {
+                        populateTickets(json);
+                       };
+                      }else if(xhttp.readyState == 4 && xhttp.status != 200){
+                        console.log("not what we are looking for")
+                      
+                      }
+                    }
+                    xhttp.open("post","http://localhost:8080/project1/FrontController/viewAll");
+                    xhttp.onload = () => {
+                        populateTickets(json);  
+                    };
+                    xhttp.send();
+                }
+                function populateTickets(json){
+                  //   clears out existing table data
+                    while(ticketsBody.firstChild){
+                      ticketsBody.removeChild(ticketsBody.firstChild);
+                    }
+                    for(var k in json){
+                      const tr = document.createElement("tr");
+                      json1 = json[k];
+                      console.log(json1);
+                      for(var j in json1 ){
+                        const td = document.createElement("td");
+
+                        if((json1[j] > 100000000)){
+                          json1[j] = new Date(json1[j]).toLocaleString();
+                        }
+                        td.textContent = json1[j];
+                        console.log(j, json1[j]);
+                        tr.appendChild(td);
+                      }
+                      ticketsBody.appendChild(tr);
+                    }
+                }
+            
+                document.addEventListener("DOMContentLoaded", () => { loadTickets();});
+                </script>
+            </div>
+              <div class = "col-md-2">   
+              </div>
+            </div>
+            
+            <div class = "row">
+              <div class = "col-md-2">   
+              </div>
+          
+              
+                  <div class = "col-md-8">
+                      <h3>Filter By:</h3>
+                  </div>
+             
+          
+             
+                <div class = "col-md-2">   
+                </div>
+            </div>
+
+            <div class = "row">
+              <div class = "col-md-2">   
+              </div>
+          
+              
+                  <div text-align = "center" class = "d-grid gap-2 col-2 mx-auto">
+                      <button text-align = "center" type="submit" class="btn btn-primary" id="approved">Approved</button>
+                  </div>
+
+                  <script type="text/javascript">
+                        document.getElementById("approved").addEventListener('click',loadApprovedTickets);
+                        console.log("setting the listener!")
+                    function loadApprovedTickets(){
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function(){
+                          console.log("changing my readystate " + xhttp.readyState);
+                          if(xhttp.readyState == 4 && xhttp.status == 200){
+                            let json = JSON.parse(xhttp.responseText);
+                            xhttp.onload = () => {
+                            populateTickets(json);
+                           };
+                          }else if(xhttp.readyState == 4 && xhttp.status != 200){
+                            console.log("not what we are looking for")
+                          }
+                        }
+                        xhttp.open("post","http://localhost:8080/project1/FrontController/viewAllApproved");
+                        xhttp.onload = () => {
+                            populateTickets(json);  
+                        };
+                        xhttp.send();
+                    }
+                  </script>
+
+                  <div text-align = "center" class = "d-grid gap-2 col-2 mx-auto">
+                      <button text-align = "center" type="submit" class="btn btn-primary" id="pending">Pending</button>
+                  </div>
+
+                  <script type="text/javascript">
+                    document.getElementById("pending").addEventListener('click',loadPendingTickets);
+                    console.log("setting the listener!")
+                function loadPendingTickets(){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function(){
+                      console.log("changing my readystate " + xhttp.readyState);
+                      if(xhttp.readyState == 4 && xhttp.status == 200){
+                        let json = JSON.parse(xhttp.responseText);
+                        xhttp.onload = () => {
+                        populateTickets(json);
+                       };
+                      }else if(xhttp.readyState == 4 && xhttp.status != 200){
+                        console.log("not what we are looking for")
+                      }
+                    }
+                    xhttp.open("post","http://localhost:8080/project1/FrontController/viewAllPending");
+                    xhttp.onload = () => {
+                        populateTickets(json);  
+                    };
+                    xhttp.send();
+                }
+              </script>
+
+                  <div text-align = "center" class = "d-grid gap-2 col-2 mx-auto">
+                      <button text-align = "center" type="submit" class="btn btn-primary" id="denied">Denied</button>
+                  </div>
+
+                  <script type="text/javascript">
+                    document.getElementById("denied").addEventListener('click',loadDeniedTickets);
+                    console.log("setting the listener!")
+                function loadDeniedTickets(){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function(){
+                      console.log("changing my readystate " + xhttp.readyState);
+                      if(xhttp.readyState == 4 && xhttp.status == 200){
+                        let json = JSON.parse(xhttp.responseText);
+                        xhttp.onload = () => {
+                        populateTickets(json);
+                       };
+                      }else if(xhttp.readyState == 4 && xhttp.status != 200){
+                        console.log("not what we are looking for")
+                      }
+                    }
+                    xhttp.open("post","http://localhost:8080/project1/FrontController/viewAllDenied");
+                    xhttp.onload = () => {
+                        populateTickets(json);  
+                    };
+                    xhttp.send();
+                }
+              </script>
+
+          
+          <div text-align = "center" class = "d-grid gap-2 col-2 mx-auto">
+            <button text-align = "center" type="submit" class="btn btn-primary" id="all">All</button>
+        </div>
+
+        <script type="text/javascript">
+          document.getElementById("all").addEventListener('click',loadTickets);
+          console.log("setting the listener!")
+         </script>
+
+                <div class = "col-md-2">   
+                </div>
+            </div>
+<br>
+<div class = "row">
+    <div class = "col-md-4"></div>
+      <div class = "col-md-4">
+        <form method="POST" action = "http://localhost:8080/project1/FrontController/changeTicketStatus">
+         <caption><h3>Change Ticket Status</h3></caption>
+           <div class = "mb-3">
+             <label for= "status" class = "form-label">Approve or Deny</label>
+               <select class="form-select" aria-label="Disabled select example" name="status" id="status" required>
+                 <option selected>approved</option>
+                 <option value="denied">denied</option>
+                </select>
+            </div>
+          <div class="mb-3">
+            <label for="ticketID" class="form-label">Ticket ID</label>
+            <input type="number" class="form-control" id="ticketID" name="ticketID" min="0" required>
+          </div>
+          <div text-align = "center" class = "d-grid gap-2 col-3 mx-auto">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+      </div>
+    <div class = "col-md-4"></div>
+  </div>
+
+    <script src="ajax.js"></script>
+</body>
+</html>

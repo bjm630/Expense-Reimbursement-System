@@ -1,0 +1,59 @@
+package com.revature.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class EmployeeHomeControllerImp implements EmployeeHomeController {
+	
+	private static EmployeeHomeController employeeHomeControllerImp = new EmployeeHomeControllerImp();
+	
+	private EmployeeHomeControllerImp() {};
+	
+	public static EmployeeHomeController getInstance() {
+	return employeeHomeControllerImp;
+	}
+
+	@Override
+	public void employeeHome(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			if((request.getSession(false) != null) && (((Integer)request.getSession().getAttribute("userID")) > 0)) {
+				
+				response.sendRedirect("http://localhost:8080/project1/employeeHome.html");
+				
+			}else {
+				response.sendRedirect("http://localhost:8080/project1/index.html");
+			}
+
+	}
+
+	@Override
+	public void resetToLanding(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+		RequestDispatcher redis = request.getRequestDispatcher("http://localhost:8080/project1/index.html");
+		redis.forward(request, response);
+
+	}
+
+	@Override
+	public void managerHome(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+			if((request.getSession(false) != null) && ((Boolean)request.getSession().getAttribute("manager"))) {
+			
+			response.sendRedirect("http://localhost:8080/project1/managerHome.html");
+			
+		}else {
+			response.sendRedirect("http://localhost:8080/project1/index.html");
+		}
+
+}
+		
+	}
+
+

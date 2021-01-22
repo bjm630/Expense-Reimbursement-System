@@ -1,0 +1,16 @@
+package com.revature.junitTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class TestMethod {
+
+	@Test
+	public void test() {
+		
+		assertEquals(expected, actual);
+		
+	}
+
+}

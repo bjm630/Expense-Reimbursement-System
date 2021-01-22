@@ -1,0 +1,39 @@
+[
+    {
+        "ticketID": 7,
+        "date": 1609465767070,
+        "type": "TRAVEL",
+        "cost": 200.0,
+        "description": "Motel 6",
+        "status": "pending",
+        "userID": 3
+    },
+    {
+        "ticketID": 1,
+        "date": 1609306394385,
+        "type": "LODGING",
+        "cost": 300.12,
+        "description": "Motel 6 stay for two nights",
+        "status": "approved",
+        "userID": 1
+    },
+    {
+        "ticketID": 5,
+        "date": 1609465223288,
+        "type": "LODGING",
+        "cost": 300.12,
+        "description": "Motel 6 stay for two nights",
+        "status": "denied",
+        "userID": 1
+    },
+    {
+        "ticketID": 9,
+        "date": 1609465830031,
+        "type": "OTHER",
+        "cost": 200.0,
+        "description": "Motel 6",
+        "status": "approved",
+        "userID": 3
+    }
+
+]

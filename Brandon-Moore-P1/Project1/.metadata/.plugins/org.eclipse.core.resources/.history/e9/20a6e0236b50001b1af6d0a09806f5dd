@@ -1,0 +1,203 @@
+package com.revature.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.models.Ticket;
+import com.revature.service.TicketServiceImp;
+
+public class TicketControllerImp implements TicketController {
+	
+	
+	private static TicketController ticketControllerImp = new TicketControllerImp();
+	
+	private TicketControllerImp() {}
+	
+	public static TicketController getInstance() {
+		return ticketControllerImp;
+	}
+
+	@Override //worked in postman
+	public void insertTicket(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+		if(request.getMethod().equals("POST")) {
+			
+			System.out.println(request.getSession().getAttribute("userID"));
+			
+			response.setContentType("application/json");
+			
+			String type = request.getParameter("type");
+			String description = request.getParameter("description");
+			Double cost = Double.parseDouble(request.getParameter("cost"));
+			Integer userID = (Integer) request.getSession().getAttribute("userID");
+			
+			TicketServiceImp.getInstance().insertTicket(type, description, cost, userID);
+			
+			
+			
+			RequestDispatcher reDis = request.getRequestDispatcher("/employeeHome.html");
+			
+		//	reDis.forward(request, response);
+			
+		//	response.sendRedirect("/project1/FrontController/insertTicket");
+			
+			response.setStatus(201);
+		} else {
+			response.setStatus(405);
+		}
+	}
+
+
+
+
+
+
+
+	@Override // Works in Postman
+	public void viewAll(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+			if(request.getMethod().equals("POST")) {
+				
+				List<Ticket> tickets = null;
+				
+				response.setContentType("application/json");
+				
+				ObjectMapper om = new ObjectMapper();
+				
+				tickets = TicketServiceImp.getInstance().viewAllTickets();
+				
+				response.getWriter().write(om.writeValueAsString(tickets));
+				
+				} else {
+					response.setStatus(405);
+				}
+
+	}
+
+	@Override // Works in Postman
+	public void viewAllApproved(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+			if(request.getMethod().equals("POST")) {
+			
+				List<Ticket> tickets = null;
+				
+				response.setContentType("application/json");
+				
+				ObjectMapper om = new ObjectMapper();
+				
+				tickets = TicketServiceImp.getInstance().viewAllTicketsByApproved();
+				
+				response.getWriter().write(om.writeValueAsString(tickets));
+				
+				} else {
+					response.setStatus(405);
+				}
+
+	}
+
+	@Override //Works in Postman
+	public void viewAllDenied(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+	
+			if(request.getMethod().equals("POST")) {
+			
+				List<Ticket> tickets = null;
+				
+				response.setContentType("application/json");
+				
+				ObjectMapper om = new ObjectMapper();
+				
+				tickets = TicketServiceImp.getInstance().viewAllTicketsByDenied();
+				
+				response.getWriter().write(om.writeValueAsString(tickets));
+				
+				} else {
+					response.setStatus(405);
+				}
+
+	}
+
+	@Override //works in postman
+	public void viewAllPending(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+			if(request.getMethod().equals("POST")) {
+				
+			List<Ticket> tickets = null;
+				
+			response.setContentType("application/json");
+			
+			ObjectMapper om = new ObjectMapper();
+			
+			tickets = TicketServiceImp.getInstance().viewAllTicketsByPending();
+			
+			response.getWriter().write(om.writeValueAsString(tickets));
+			
+			} else {
+				response.setStatus(405);
+			}
+
+	}
+
+	@Override //worked in postman
+	public void viewAllUser(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+			if(request.getMethod().equals("POST")) {
+				
+			List<Ticket> tickets = null;
+				
+			response.setContentType("application/json");
+				
+			Integer userID = Integer.parseInt(request.getParameter("userID"));
+			
+			ObjectMapper om = new ObjectMapper();
+			
+			tickets = TicketServiceImp.getInstance().viewAllUserTickets(userID);
+			
+			response.getWriter().write(om.writeValueAsString(tickets));
+			
+			} else {
+				response.setStatus(405);
+			}
+
+	}
+
+	@Override //worked in postman
+	public void changeTicketStatus(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, ServletException {
+		
+			if(request.getMethod().equals("POST")) {
+					
+			response.setContentType("application/json");
+			
+			String status = (request.getParameter("status"));
+			Integer ticketID = Integer.parseInt(request.getParameter("ticketID"));
+			
+			TicketServiceImp.getInstance().changeTicketStatus(status, ticketID);
+			
+			RequestDispatcher reDis = request.getRequestDispatcher("/managerHome.html");
+			
+			reDis.forward(request, response);
+			
+			response.setStatus(204);
+		} else {
+			response.setStatus(405);
+		}
+			
+
+	}
+
+
+}
