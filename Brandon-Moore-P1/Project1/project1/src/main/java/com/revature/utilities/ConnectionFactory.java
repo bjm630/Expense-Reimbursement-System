@@ -12,9 +12,9 @@ public final class ConnectionFactory {
 	private static Logger log = LogManager.getLogger(ConnectionFactory.class);
 
 	
-	private static final String URL = "jdbc:postgresql://database-1.cccgubkbcmc1.us-east-2.rds.amazonaws.com/postgres";
-	private static final String USERNAME = "postgres";
-	private static final String PASSWORD = "Christina";
+	private static final String URL = ;
+	private static final String USERNAME = ;
+	private static final String PASSWORD = ;
 	
 	private static Connection conn;
 
